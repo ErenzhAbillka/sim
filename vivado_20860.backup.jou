@@ -1,0 +1,168 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Fri Jul 11 17:02:48 2025
+# Process ID: 20860
+# Current directory: O:/Study/FPGA_prj/project_3_sim
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent98516 O:\Study\FPGA_prj\project_3_sim\ov5640_sd.xpr
+# Log file: O:/Study/FPGA_prj/project_3_sim/vivado.log
+# Journal file: O:/Study/FPGA_prj/project_3_sim\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project O:/Study/FPGA_prj/project_3_sim/ov5640_sd.xpr
+report_ip_status -name ip_status 
+upgrade_ip [get_ips  {system_axi_mem_intercon_0 system_axi_vdma_1_0 system_rst_processing_system7_0_150M_0 system_rst_processing_system7_0_100M_0 system_alinx_ov5640_0_0 system_v_axi4s_vid_out_0_0 system_axi_vdma_0_0 system_axi_gpio_0_0 system_processing_system7_0_axi_periph_0 system_v_tc_0_0 system_axis_subset_converter_0_1 system_xlconstant_1_0}] -log ip_upgrade.log
+export_ip_user_files -of_objects [get_ips {system_axi_mem_intercon_0 system_axi_vdma_1_0 system_rst_processing_system7_0_150M_0 system_rst_processing_system7_0_100M_0 system_alinx_ov5640_0_0 system_v_axi4s_vid_out_0_0 system_axi_vdma_0_0 system_axi_gpio_0_0 system_processing_system7_0_axi_periph_0 system_v_tc_0_0 system_axis_subset_converter_0_1 system_xlconstant_1_0}] -no_script -sync -force -quiet
+generate_target all [get_files  O:/Study/FPGA_prj/project_3_sim/ov5640_sd.srcs/sources_1/bd/system/system.bd]
+catch { config_ip_cache -export [get_ips -all system_alinx_ov5640_0_0] }
+catch { config_ip_cache -export [get_ips -all system_axi_dynclk_0_0] }
+catch { config_ip_cache -export [get_ips -all system_axi_vdma_0_0] }
+catch { config_ip_cache -export [get_ips -all system_axi_vdma_1_0] }
+catch { config_ip_cache -export [get_ips -all system_processing_system7_0_0] }
+catch { config_ip_cache -export [get_ips -all system_rst_processing_system7_0_100M_0] }
+catch { config_ip_cache -export [get_ips -all system_rst_processing_system7_0_150M_0] }
+catch { config_ip_cache -export [get_ips -all system_v_axi4s_vid_out_0_0] }
+catch { config_ip_cache -export [get_ips -all system_v_tc_0_0] }
+catch { config_ip_cache -export [get_ips -all system_axis_subset_converter_0_1] }
+catch { config_ip_cache -export [get_ips -all system_axi_gpio_0_0] }
+catch { config_ip_cache -export [get_ips -all system_rgb2dvi_0_0] }
+catch { config_ip_cache -export [get_ips -all system_xbar_0] }
+catch { config_ip_cache -export [get_ips -all system_xbar_1] }
+catch { config_ip_cache -export [get_ips -all system_s00_regslice_0] }
+catch { config_ip_cache -export [get_ips -all system_s00_data_fifo_0] }
+catch { config_ip_cache -export [get_ips -all system_s01_regslice_0] }
+catch { config_ip_cache -export [get_ips -all system_s01_data_fifo_0] }
+catch { config_ip_cache -export [get_ips -all system_m00_data_fifo_0] }
+catch { config_ip_cache -export [get_ips -all system_m00_regslice_0] }
+catch { config_ip_cache -export [get_ips -all system_auto_pc_0] }
+catch { config_ip_cache -export [get_ips -all system_auto_pc_1] }
+export_ip_user_files -of_objects [get_files O:/Study/FPGA_prj/project_3_sim/ov5640_sd.srcs/sources_1/bd/system/system.bd] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] O:/Study/FPGA_prj/project_3_sim/ov5640_sd.srcs/sources_1/bd/system/system.bd]
+launch_runs -jobs 9 {system_axi_dynclk_0_0_synth_1 system_processing_system7_0_0_synth_1 system_rgb2dvi_0_0_synth_1 system_alinx_ov5640_0_0_synth_1 system_axi_vdma_0_0_synth_1 system_axi_vdma_1_0_synth_1 system_rst_processing_system7_0_100M_0_synth_1 system_rst_processing_system7_0_150M_0_synth_1 system_v_axi4s_vid_out_0_0_synth_1 system_v_tc_0_0_synth_1 system_axis_subset_converter_0_1_synth_1 system_axi_gpio_0_0_synth_1 system_xbar_0_synth_1 system_xbar_1_synth_1 system_s00_regslice_0_synth_1 system_s00_data_fifo_0_synth_1 system_s01_regslice_0_synth_1 system_s01_data_fifo_0_synth_1 system_m00_data_fifo_0_synth_1 system_m00_regslice_0_synth_1 system_auto_pc_0_synth_1 system_auto_pc_1_synth_1}
+export_simulation -of_objects [get_files O:/Study/FPGA_prj/project_3_sim/ov5640_sd.srcs/sources_1/bd/system/system.bd] -directory O:/Study/FPGA_prj/project_3_sim/ov5640_sd.ip_user_files/sim_scripts -ip_user_files_dir O:/Study/FPGA_prj/project_3_sim/ov5640_sd.ip_user_files -ipstatic_source_dir O:/Study/FPGA_prj/project_3_sim/ov5640_sd.ip_user_files/ipstatic -lib_map_path [list {modelsim=O:/Study/FPGA_prj/project_3_sim/ov5640_sd.cache/compile_simlib/modelsim} {questa=O:/Study/FPGA_prj/project_3_sim/ov5640_sd.cache/compile_simlib/questa} {riviera=O:/Study/FPGA_prj/project_3_sim/ov5640_sd.cache/compile_simlib/riviera} {activehdl=O:/Study/FPGA_prj/project_3_sim/ov5640_sd.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+update_compile_order -fileset sources_1
+startgroup
+set_property -dict [list CONFIG.PCW_FPGA2_PERIPHERAL_FREQMHZ {140} CONFIG.PCW_EN_CLK2_PORT {1} CONFIG.PCW_QSPI_GRP_SINGLE_SS_ENABLE {1} CONFIG.PCW_I2C1_PERIPHERAL_ENABLE {1}] [get_bd_cells processing_system7_0]
+endgroup
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:axis_interconnect:2.1 axis_interconnect_0
+endgroup
+startgroup
+set_property -dict [list CONFIG.PCW_USE_S_AXI_HP1 {1}] [get_bd_cells processing_system7_0]
+endgroup
+set_property location {6 1987 1066} [get_bd_cells axis_interconnect_0]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_vdma:6.3 axi_vdma_2
+endgroup
+set_property location {5 1710 1054} [get_bd_cells axi_vdma_2]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:v_axi4s_vid_out:4.0 v_axi4s_vid_out_1
+endgroup
+set_property location {4 1376 1101} [get_bd_cells v_axi4s_vid_out_1]
+set_property location {3 1250 1248} [get_bd_cells v_axi4s_vid_out_1]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:v_tc:6.1 v_tc_1
+endgroup
+set_property location {4 1355 960} [get_bd_cells v_tc_1]
+apply_bd_automation -rule xilinx.com:bd_rule:axi4_s2mm -config {Dest_Intf "/axis_interconnect_0/M00_AXIS" Bridge_IP "New AXI DMA (High/Medium frequency transfer)" Clk_Stream "Auto" Clk_MM "Auto" }  [get_bd_intf_pins processing_system7_0/S_AXI_HP1]
+undo
+set_property -dict [list CONFIG.NUM_MI {1}] [get_bd_cells axis_interconnect_0]
+set_property location {4 1327 1023} [get_bd_cells axis_interconnect_0]
+delete_bd_objs [get_bd_cells axis_interconnect_0]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_interconnect_0
+endgroup
+undo
+redo
+set_property location {5 1708 1081} [get_bd_cells axi_interconnect_0]
+set_property -dict [list CONFIG.NUM_MI {1}] [get_bd_cells axi_interconnect_0]
+connect_bd_intf_net [get_bd_intf_pins processing_system7_0/S_AXI_HP1] -boundary_type upper [get_bd_intf_pins axi_interconnect_0/M00_AXI]
+set_property location {4 1375 1088} [get_bd_cells axi_vdma_2]
+set_property -dict [list CONFIG.c_m_axis_mm2s_tdata_width {24} CONFIG.c_num_fstores {1} CONFIG.c_mm2s_genlock_mode {0} CONFIG.c_s2mm_genlock_mode {0} CONFIG.c_mm2s_max_burst_length {32} CONFIG.c_include_s2mm {0}] [get_bd_cells axi_vdma_2]
+set_property location {4 1331 1075} [get_bd_cells axi_vdma_2]
+connect_bd_intf_net -boundary_type upper [get_bd_intf_pins axi_interconnect_0/S00_AXI] [get_bd_intf_pins axi_vdma_2/M_AXI_MM2S]
+set_property location {4 1301 1274} [get_bd_cells v_axi4s_vid_out_1]
+set_property -dict [list CONFIG.C_S_AXIS_VIDEO_FORMAT.VALUE_SRC USER CONFIG.C_S_AXIS_VIDEO_DATA_WIDTH.VALUE_SRC USER] [get_bd_cells v_axi4s_vid_out_1]
+set_property -dict [list CONFIG.C_HAS_ASYNC_CLK {1} CONFIG.C_ADDR_WIDTH {12} CONFIG.C_VTG_MASTER_SLAVE {1}] [get_bd_cells v_axi4s_vid_out_1]
+connect_bd_intf_net [get_bd_intf_pins axi_vdma_2/M_AXIS_MM2S] [get_bd_intf_pins v_axi4s_vid_out_1/video_in]
+connect_bd_intf_net [get_bd_intf_pins v_tc_1/vtiming_out] [get_bd_intf_pins v_axi4s_vid_out_1/vtiming_in]
+startgroup
+set_property -dict [list CONFIG.NUM_MI {7}] [get_bd_cells processing_system7_0_axi_periph]
+endgroup
+connect_bd_intf_net -boundary_type upper [get_bd_intf_pins processing_system7_0_axi_periph/M05_AXI] [get_bd_intf_pins axi_vdma_2/S_AXI_LITE]
+startgroup
+set_property -dict [list CONFIG.NUM_MI {6}] [get_bd_cells processing_system7_0_axi_periph]
+endgroup
+startgroup
+set_property -dict [list CONFIG.NUM_MI {7}] [get_bd_cells processing_system7_0_axi_periph]
+endgroup
+connect_bd_intf_net -boundary_type upper [get_bd_intf_pins processing_system7_0_axi_periph/M06_AXI] [get_bd_intf_pins v_tc_1/ctrl]
+startgroup
+create_bd_cell -type ip -vlnv digilentinc.com:ip:axi_dynclk:1.0 axi_dynclk_1
+endgroup
+undo
+redo
+set_property location {1 107 613} [get_bd_cells axi_dynclk_1]
+set_property location {4 1247 1344} [get_bd_cells axi_dynclk_1]
+startgroup
+set_property -dict [list CONFIG.NUM_MI {8}] [get_bd_cells processing_system7_0_axi_periph]
+endgroup
+connect_bd_intf_net -boundary_type upper [get_bd_intf_pins processing_system7_0_axi_periph/M07_AXI] [get_bd_intf_pins axi_dynclk_1/s00_axi]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_0
+endgroup
+set_property location {5 1642 1551} [get_bd_cells util_vector_logic_0]
+set_property location {3 1275 1509} [get_bd_cells axi_dynclk_1]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:util_reduced_logic:2.0 util_reduced_logic_0
+endgroup
+set_property location {6 2088 1544} [get_bd_cells util_reduced_logic_0]
+set_property location {3 1306 1576} [get_bd_cells axi_dynclk_1]
+set_property location {3 1296 1550} [get_bd_cells axi_dynclk_1]
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK2 (142 MHz)" }  [get_bd_pins processing_system7_0/S_AXI_HP1_ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK2 (142 MHz)" }  [get_bd_pins processing_system7_0_axi_periph/M05_ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK2 (142 MHz)" }  [get_bd_pins processing_system7_0_axi_periph/M06_ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK2 (142 MHz)" }  [get_bd_pins processing_system7_0_axi_periph/M07_ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK2 (142 MHz)" }  [get_bd_pins axi_vdma_2/m_axi_mm2s_aclk]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK2 (142 MHz)" }  [get_bd_pins axi_vdma_2/m_axis_mm2s_aclk]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK2 (142 MHz)" }  [get_bd_pins axi_interconnect_0/ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK2 (142 MHz)" }  [get_bd_pins axi_dynclk_1/REF_CLK_I]
+endgroup
+undo
+redo
+undo
+set_property -dict [list CONFIG.C_SIZE {1} CONFIG.C_OPERATION {not} CONFIG.LOGO_FILE {data/sym_notgate.png}] [get_bd_cells util_vector_logic_0]
+set_property -dict [list CONFIG.C_SIZE {1} CONFIG.C_OPERATION {and} CONFIG.LOGO_FILE {data/sym_andgate.png}] [get_bd_cells util_reduced_logic_0]
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK2 (142 MHz)" }  [get_bd_pins processing_system7_0/S_AXI_HP1_ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK0 (100 MHz)" }  [get_bd_pins processing_system7_0_axi_periph/M05_ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK0 (100 MHz)" }  [get_bd_pins processing_system7_0_axi_periph/M06_ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK0 (100 MHz)" }  [get_bd_pins processing_system7_0_axi_periph/M07_ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK2 (142 MHz)" }  [get_bd_pins axi_vdma_2/m_axi_mm2s_aclk]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK2 (142 MHz)" }  [get_bd_pins axi_vdma_2/m_axis_mm2s_aclk]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK2 (142 MHz)" }  [get_bd_pins axi_interconnect_0/ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK2 (142 MHz)" }  [get_bd_pins axi_dynclk_1/REF_CLK_I]
+endgroup
+undo
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK0 (100 MHz)" }  [get_bd_pins processing_system7_0/S_AXI_HP1_ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK0 (100 MHz)" }  [get_bd_pins processing_system7_0_axi_periph/M05_ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK0 (100 MHz)" }  [get_bd_pins processing_system7_0_axi_periph/M06_ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK0 (100 MHz)" }  [get_bd_pins processing_system7_0_axi_periph/M07_ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK0 (100 MHz)" }  [get_bd_pins axi_vdma_2/m_axi_mm2s_aclk]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK0 (100 MHz)" }  [get_bd_pins axi_vdma_2/m_axis_mm2s_aclk]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK0 (100 MHz)" }  [get_bd_pins axi_interconnect_0/ACLK]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/processing_system7_0/FCLK_CLK0 (100 MHz)" }  [get_bd_pins axi_dynclk_1/REF_CLK_I]
+endgroup
+undo
+write_bd_tcl design_1.tcl
+write_bd_tcl design_1.tcl
+write_bd_tcl -force O:/Study/FPGA_prj/project_3_sim/system.tcl
+startgroup
+copy_bd_objs /  [get_bd_cells {axi_vdma_2}]
+set_property location {4 1496 1057} [get_bd_cells axi_vdma_3]
+endgroup
+undo
+undo
