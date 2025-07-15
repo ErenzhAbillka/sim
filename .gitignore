@@ -1,0 +1,14 @@
+*.jou
+*.log
+*.str
+*.backup.*
+*.bit
+*.hdf
+*.elf
+*.html
+*.sdk/
+*.metadata/
+*.snap
+*.index
+*.project
+ps7_init.*
