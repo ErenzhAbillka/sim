@@ -1,0 +1,130 @@
+/************************************************************************/
+/*	display_demo.c -- ALINX AX7010 HDMI Display demonstration			*/
+/************************************************************************/
+
+#include "display_demo.h"
+#include "display_ctrl/display_ctrl.h"
+#include <stdio.h>
+#include "math.h"
+#include <ctype.h>
+#include <stdlib.h>
+#include "xil_types.h"
+#include "xil_cache.h"
+#include "xparameters.h"
+#include "xiicps.h"
+#include "vdma.h"
+#include "i2c/PS_i2c.h"
+#include "xgpio.h"
+#include "sleep.h"
+#include "ov5640.h"
+#include "xscugic.h"
+#include "zynq_interrupt.h"
+#include "xgpiops.h"
+#include "ff.h"
+#include "bmp.h"
+#include "xil_cache.h"
+#include "xtime_l.h"
+
+#define DYNCLK_BASEADDR XPAR_AXI_DYNCLK_0_BASEADDR
+#define DISPLAY_VDMA_ID XPAR_AXIVDMA_0_DEVICE_ID
+#define DISP_VTC_ID XPAR_VTC_0_DEVICE_ID
+#define VID_VTC_IRPT_ID XPS_FPGA3_INT_ID
+#define VID_GPIO_IRPT_ID XPS_FPGA4_INT_ID
+#define SCU_TIMER_ID XPAR_SCUTIMER_DEVICE_ID
+#define UART_BASEADDR XPAR_PS7_UART_1_BASEADDR
+#define CAME_VDMA_ID  XPAR_AXIVDMA_1_DEVICE_ID
+#define S2MM_INTID XPAR_FABRIC_AXI_VDMA_1_S2MM_INTROUT_INTR
+#define MM2S_INTID XPAR_FABRIC_AXI_VDMA_0_MM2S_INTROUT_INTR
+#define KEY_INTR_ID        XPAR_XGPIOPS_0_INTR
+#define MIO_0_ID           XPAR_PS7_GPIO_0_DEVICE_ID
+#define GPIO_INPUT         0
+#define GPIO_OUTPUT		   1
+
+DisplayCtrl dispCtrl;
+XAxiVdma display_vdma;
+XAxiVdma camera_vdma;
+XIicPs ps_i2c0;
+XGpio cmos_rstn;
+XScuGic XScuGicInstance;
+
+u8 frameBuf[DISPLAY_NUM_FRAMES][DEMO_MAX_FRAME] __attribute__ ((aligned(64)));
+u8 *pFrames[DISPLAY_NUM_FRAMES];
+
+//static void WriteCallBack(void *CallbackRef, u32 Mask);
+//static void WriteErrorCallBack(void *CallbackRef, u32 Mask);
+static void ReadCallBack(void *CallbackRef, u32 Mask);
+
+int main(void)
+{
+	int Status;
+	XAxiVdma_Config *vdmaConfig;
+	int i;
+
+	for (i = 0; i < DISPLAY_NUM_FRAMES; i++)
+	{
+		pFrames[i] = frameBuf[i];
+		memset(pFrames[i], 0, DEMO_MAX_FRAME);
+		Xil_DCacheFlushRange((INTPTR) pFrames[i], DEMO_MAX_FRAME);
+	}
+
+	InterruptInit(XPAR_SCUGIC_0_DEVICE_ID, &XScuGicInstance);
+	i2c_init(&ps_i2c0, XPAR_XIICPS_0_DEVICE_ID, 40000);
+
+	XGpio_Initialize(&cmos_rstn, XPAR_CMOS_RST_DEVICE_ID);
+	XGpio_SetDataDirection(&cmos_rstn, 1, 0x0);
+	XGpio_DiscreteWrite(&cmos_rstn, 1, 0x1);
+	usleep(500000);
+	XGpio_DiscreteWrite(&cmos_rstn, 1, 0x0);
+	usleep(500000);
+	XGpio_DiscreteWrite(&cmos_rstn, 1, 0x1);
+	usleep(500000);
+
+	sensor_init(&ps_i2c0);
+
+	vdma_write_init(CAME_VDMA_ID, &camera_vdma, 1280 * 3, 720, DEMO_STRIDE, (unsigned int)pFrames[0], DISPLAY_NUM_FRAMES);
+//	XAxiVdma_SetCallBack(&camera_vdma, XAXIVDMA_HANDLER_GENERAL, WriteCallBack, (void *)&camera_vdma, XAXIVDMA_WRITE);
+//	XAxiVdma_SetCallBack(&camera_vdma, XAXIVDMA_HANDLER_ERROR, WriteErrorCallBack, (void *)&camera_vdma, XAXIVDMA_WRITE);
+	InterruptConnect(&XScuGicInstance, S2MM_INTID, XAxiVdma_WriteIntrHandler, (void *)&camera_vdma);
+	XAxiVdma_IntrEnable(&camera_vdma, XAXIVDMA_IXR_ALL_MASK, XAXIVDMA_WRITE);
+
+	vdmaConfig = XAxiVdma_LookupConfig(DISPLAY_VDMA_ID);
+	if (!vdmaConfig) xil_printf("No video DMA found for ID %d\r\n", DISPLAY_VDMA_ID);
+	Status = XAxiVdma_CfgInitialize(&display_vdma, vdmaConfig, vdmaConfig->BaseAddress);
+	if (Status != XST_SUCCESS) xil_printf("VDMA Configuration Initialization failed %d\r\n", Status);
+
+	Status = DisplayInitialize(&dispCtrl, &display_vdma, DISP_VTC_ID, DYNCLK_BASEADDR, pFrames, DEMO_STRIDE);
+	if (Status != XST_SUCCESS) xil_printf("Display Ctrl initialization failed during demo initialization %d\r\n", Status);
+	Status = DisplayStart(&dispCtrl);
+	if (Status != XST_SUCCESS) xil_printf("Couldn't start display during demo initialization %d\r\n", Status);
+
+	XAxiVdma_SetCallBack(&display_vdma, XAXIVDMA_HANDLER_GENERAL, ReadCallBack, (void *)&display_vdma, XAXIVDMA_READ);
+	InterruptConnect(&XScuGicInstance, MM2S_INTID, XAxiVdma_ReadIntrHandler, (void *)&display_vdma);
+	XAxiVdma_IntrEnable(&display_vdma, XAXIVDMA_IXR_ALL_MASK, XAXIVDMA_READ);
+
+	while (1)
+	{
+
+	}
+
+	return 0;
+}
+
+//static void WriteCallBack(void *CallbackRef, u32 Mask)
+//{
+//	if (Mask & XAXIVDMA_IXR_FRMCNT_MASK)
+//	{
+//	}
+//}
+//
+//static void WriteErrorCallBack(void *CallbackRef, u32 Mask)
+//{
+//}
+
+static void ReadCallBack(void *CallbackRef, u32 Mask)
+{
+	if (Mask & XAXIVDMA_IXR_FRMCNT_MASK)
+	{
+		XAxiVdma_StartParking((XAxiVdma*)CallbackRef, 0, XAXIVDMA_READ);
+	}
+}
+
